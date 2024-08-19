@@ -32,7 +32,7 @@ export default function Home() {
     return (
       <Row gutter={12}
         justify="end"
-        style={{ padding: '10px' }}
+        style={{ margin: '10px' }}
       >
         <Col>
           {user?.email || 'please login'}

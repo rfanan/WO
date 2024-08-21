@@ -1,3 +1,4 @@
+import ButtonPrimary from "@/components/button/ButtonPrimary";
 import { defaultErrorModal } from "@/components/modal/DefaultErrorModal";
 import { getFirebaseAuth, subscribeToAuthChanges } from "@/config/firebase";
 import { Button, Col, Modal, Row } from "antd";
@@ -45,6 +46,13 @@ export default function Home() {
           <Button type="primary" onClick={() => defaultErrorModal()}>
             test log
           </Button>
+        </Col>
+        <Col>
+          <ButtonPrimary
+            disabled={true}
+            onClick={() => {}}>
+            Save This Event
+          </ButtonPrimary>
         </Col>
       </Row>
     );

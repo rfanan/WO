@@ -1,7 +1,11 @@
 import { defaultErrorModal } from "@/components/modal/DefaultErrorModal";
 import { getFirebaseAuth, subscribeToAuthChanges } from "@/config/firebase";
 import { Button, Col, Modal, Row } from "antd";
-import { GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+} from "firebase/auth";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -30,30 +34,20 @@ export default function Home() {
 
   function renderAuthUi() {
     return (
-      <Row gutter={12}
-        justify="end"
-        style={{ margin: '10px' }}
-      >
+      <Row gutter={12} justify="end" style={{ margin: "10px" }}>
+        <Col>{user?.email || "please login"}</Col>
         <Col>
-          {user?.email || 'please login'}
-        </Col>
-        <Col>
-          <Button
-            type="primary"
-            onClick={handleGoogleLogin}>
+          <Button type="primary" onClick={handleGoogleLogin}>
             Login
           </Button>
         </Col>
         <Col>
-          <Button
-            type="primary"
-            onClick={logUser}
-          >
+          <Button type="primary" onClick={() => defaultErrorModal()}>
             test log
           </Button>
         </Col>
       </Row>
-    )
+    );
   }
 
   return (
@@ -61,6 +55,10 @@ export default function Home() {
       {renderAuthUi()}
       <div className="h-screen content-center">
         <h1 className="text-center text-2xl">Halo dunia !</h1>
+        <div className="h-screen text-center content-center">
+          <h1 className="text-2xl">Halo dunia !</h1>
+          <Button className="bg-red-400">button baru</Button>
+        </div>
       </div>
     </>
   );

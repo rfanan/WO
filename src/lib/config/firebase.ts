@@ -28,7 +28,6 @@ export async function getAuthToken(): Promise<string | null> {
     if (user) {
         try {
             const tokenResult = await user.getIdToken();
-            console.log("token result", tokenResult);
             return tokenResult;
         } catch (error) {
             console.error("Error getting Firebase Auth token:", error);

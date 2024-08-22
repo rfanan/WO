@@ -1,6 +1,6 @@
 import ButtonPrimary from "@/components/button/ButtonPrimary";
 import { defaultErrorModal } from "@/components/modal/DefaultErrorModal";
-import { getFirebaseAuth, subscribeToAuthChanges } from "@/config/firebase";
+import { getFirebaseAuth, subscribeToAuthChanges } from "@/lib/config/firebase";
 import { Button, Col, Modal, Row } from "antd";
 import {
   GoogleAuthProvider,
@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import Buttonn from "@/components/button";
 import ButtonTest from "@/components/button";
+import { API_getUsers } from "@/lib/api/api";
 
 export default function Home() {
   const [user, setUser] = useState<any>(null);
@@ -18,6 +19,23 @@ export default function Home() {
     const unsubscribe = subscribeToAuthChanges(setUser);
     return () => unsubscribe();
   }, []);
+
+
+  async function getApiTest() {
+    let token = await user?.getIdToken();
+    let body = {};
+
+    try {
+      let result = await API_getUsers(token, body);
+      if (result.body.is_success) {
+        console.log("Call API_getUsers success");
+      } else {
+        defaultErrorModal(result.body.data)
+      }
+    } catch (error) {
+      defaultErrorModal("Call API error")
+    }
+  }
 
   async function handleGoogleLogin() {
     try {
@@ -53,7 +71,15 @@ export default function Home() {
           </Button>
         </Col>
         <Col>
-          <ButtonPrimary disabled={true} onClick={() => {}}>
+          <Button
+            type="primary"
+            onClick={() => getApiTest()}
+          >
+            test call api
+          </Button>
+        </Col>
+        <Col>
+          <ButtonPrimary disabled={true} onClick={() => { }}>
             Save This Event
           </ButtonPrimary>
         </Col>

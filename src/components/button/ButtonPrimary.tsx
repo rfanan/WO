@@ -31,7 +31,6 @@ const ButtonPrimary = (props: Props) => {
                 margin: props.margin || "5px",
                 fontSize: "0.8rem",
                 fontWeight: 600,
-                fontFamily :"Product Sans",
                 backgroundColor: COLOR.primaryButton,
                 color: COLOR.white,
                 border: "solid 1px " + COLOR.primaryButton,

@@ -1,6 +1,6 @@
 import InputForm from "@/components/form/InputForm";
 import { COLOR } from "@/styles/color";
-import { Col, Form, Row } from "antd";
+import { Button, Col, Form, Row } from "antd";
 
 export default function SignIn() {
   return (
@@ -32,6 +32,15 @@ export default function SignIn() {
                 label={"Password"}
                 type="Password"
               />
+            </Col>
+            <Col span={24}>
+              <Button style={{
+                width: "100%",
+                backgroundColor: COLOR.primaryButton,
+                color: COLOR.white
+              }}>
+                Login
+              </Button>
             </Col>
           </Row>
         </Form>

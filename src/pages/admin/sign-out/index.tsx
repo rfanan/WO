@@ -1,8 +1,7 @@
 export default function SignOut() {
-    return (
-      <>
-        SignOut
-      </>
-    );
-  }
-  
+  return (
+    <>
+      SignOut
+    </>
+  );
+}

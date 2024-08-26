@@ -7,16 +7,11 @@ import { Content } from "antd/es/layout/layout";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const pathnameParts = router.asPath?.split('/').filter(part => part.length > 0);
-
-  useEffect(() => {
-    console.log('router path', router.asPath);
-    console.log('pathnameParts', pathnameParts);
-  }, [])
 
   const [collapsed, setCollapsed] = useState(false);
 

@@ -14,14 +14,12 @@ export default function SignIn() {
   const router = useRouter();
 
   function handleLogin(item: any) {
-    console.log(item)
     setIsLoading(true)
     try {
       const auth = getFirebaseAuth();
       signInWithEmailAndPassword(auth, item['email'], item['password'])
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log('login success', user)
           router.push("/admin")
           setIsLoading(false)
         })

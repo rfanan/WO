@@ -1,6 +1,6 @@
-import React from "react";
 import clsx from "clsx";
-import { IconPhotoPause } from "@tabler/icons-react";
+import React from "react";
+
 interface Props {
   children?: any;
   className?: any;
@@ -10,21 +10,22 @@ interface Props {
 
 const Button = (props: Props) => {
   let defaultValue = {
-    className: "bg-blue-400 hover:bg-blue-300",
+    className: "bg-[#CCDBB1] rounded-full",
   };
+
   let className = props.className + " " + defaultValue.className;
 
   return (
     <button
-      onClick={props.onClick}
-      type={props.type}
+      {...props}
       className={clsx(
         className,
-        "[&>svg]:h-5 [&>svg]:w-5 flex gap-1 items-center py-3 px-4 rounded-3xl font-medium"
+        "[&>svg]:h-5 [&>svg]:w-5 gap-2 px-3 py-2 flex items-center"
       )}
     >
       {props.children}
     </button>
   );
 };
+
 export default Button;

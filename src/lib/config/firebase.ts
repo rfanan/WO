@@ -20,7 +20,7 @@ export function getFirebaseAuth() {
 
 export function subscribeToAuthChanges(callback: (user: any) => void) {
     return onAuthStateChanged(auth, callback);
-}
+} 
 
 export async function getAuthToken(): Promise<string | null> {
     const user = getFirebaseAuth().currentUser;

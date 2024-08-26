@@ -11,7 +11,9 @@ import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const pathnameParts = router.asPath?.split('/').filter(part => part.length > 0);
+  const pathnameParts = router.asPath
+    ?.split("/")
+    .filter((part) => part.length > 0);
 
   const [collapsed, setCollapsed] = useState(false);
 
@@ -20,7 +22,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <Layout style={{ height: "100vh" }}>
         <SideNavigation collapsed={collapsed} />
         <Layout>
-          <DashboardHeader collapsed={collapsed} onClick={() => setCollapsed(!collapsed)} />
+          <DashboardHeader
+            collapsed={collapsed}
+            onClick={() => setCollapsed(!collapsed)}
+          />
           <Content>
             <AuthProvider>
               <Component {...pageProps} />
@@ -28,19 +33,19 @@ export default function App({ Component, pageProps }: AppProps) {
           </Content>
         </Layout>
       </Layout>
-    )
+    );
   }
 
   function renderContentOnly() {
-    return <Component {...pageProps} />
+    return <Component {...pageProps} />;
   }
 
   if (pathnameParts[0] == "admin") {
     if (pathnameParts[1] == "sign-in") {
-      return renderContentOnly()
+      return renderContentOnly();
     }
-    return renderContentWithNavigationAndHeader()
+    return renderContentWithNavigationAndHeader();
   } else {
-    return renderContentOnly()
+    return renderContentOnly();
   }
 }

@@ -1,15 +1,15 @@
 import ButtonPrimary from "@/components/button/ButtonPrimary";
 import { defaultErrorModal } from "@/components/modal/DefaultErrorModal";
 import { getFirebaseAuth, subscribeToAuthChanges } from "@/config/firebase";
-import { Button, Col, Modal, Row } from "antd";
+import { Col, Modal, Row } from "antd";
 import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithRedirect,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
-import Buttonn from "@/components/button";
-import ButtonTest from "@/components/button";
+import Button from "@/components/button";
+import { IconBrandGithub, IconLogin } from "@tabler/icons-react";
 
 export default function Home() {
   const [user, setUser] = useState<any>(null);
@@ -38,24 +38,12 @@ export default function Home() {
   function renderAuthUi() {
     return (
       <Row gutter={12} justify="end" style={{ margin: "10px" }}>
-        <Col>{user?.email || "please login"}</Col>
+        <Col className="flex items-center">{user?.displayName}</Col>
         <Col>
-          <Button type="primary" onClick={handleGoogleLogin}>
+          <Button onClick={handleGoogleLogin}>
             Login
+            <IconLogin />
           </Button>
-        </Col>
-        <Col>
-          <Button
-            type="primary"
-            onClick={() => defaultErrorModal("modal private")}
-          >
-            test log
-          </Button>
-        </Col>
-        <Col>
-          <ButtonPrimary disabled={true} onClick={() => {}}>
-            Save This Event
-          </ButtonPrimary>
         </Col>
       </Row>
     );
@@ -63,16 +51,18 @@ export default function Home() {
 
   return (
     <>
-      {renderAuthUi()}
-      <div className="h-screen content-center">
-        <h1 className="text-center text-2xl">Halo dunia !</h1>
-        <div className="h-screen text-center content-center gap-9">
-          <h1 className="text-2xl">Halo dunia !</h1>
-          <div className="gap-5">
-            <Button>button </Button>
-            <ButtonTest className={"py-8 px-5 rounded-lg bg-teal-500"}>
-              btn test
-            </ButtonTest>
+      <div className="bg-white h-screen text-slate-950">
+        <div className="w-full px-5 bg">
+          <div className="flex items-center justify-between">
+            <div>Logo</div>
+            <div className="flex gap-6">
+              <div>Home</div>
+              <div>About</div>
+              <div>Service</div>
+              <div>Package</div>
+              <div>Portolio</div>
+            </div>
+            <div className="text-slate-100">{renderAuthUi()}</div>
           </div>
         </div>
       </div>

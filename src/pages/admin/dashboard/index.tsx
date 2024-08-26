@@ -1,6 +1,9 @@
+import { useAuth } from "@/lib/auth";
 import { COLOR } from "@/styles/color";
 
-export default function SignIn() {
+export default function Dashboard() {
+  const { user } = useAuth();
+
   return (
     <div style={{
       margin: '24px 16px',

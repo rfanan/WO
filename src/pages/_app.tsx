@@ -1,5 +1,6 @@
 import DashboardHeader from "@/components/common/DashboardHeader";
 import SideNavigation from "@/components/common/SideNavigation";
+import { AuthProvider } from "@/lib/auth";
 import "@/styles/globals.css";
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
@@ -26,7 +27,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <Layout>
           <DashboardHeader collapsed={collapsed} onClick={() => setCollapsed(!collapsed)} />
           <Content>
-            <Component {...pageProps} />
+            <AuthProvider>
+              <Component {...pageProps} />
+            </AuthProvider>
           </Content>
         </Layout>
       </Layout>

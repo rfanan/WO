@@ -1,18 +1,14 @@
-import ButtonPrimary from "@/components/button/ButtonPrimary";
 import { defaultErrorModal } from "@/components/modal/DefaultErrorModal";
-import { getFirebaseAuth, subscribeToAuthChanges } from "@/config/firebase";
-import { Col, Modal, Row } from "antd";
+import { Col, Row } from "antd";
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
-import Buttonn from "@/components/button";
-import ButtonTest from "@/components/button";
 import { API_getUsers } from "@/lib/api/api";
 import Button from "@/components/button";
-import { IconBrandGithub, IconLogin } from "@tabler/icons-react";
+import { IconLogin } from "@tabler/icons-react";
+import { getFirebaseAuth, subscribeToAuthChanges } from "@/lib/config/firebase";
 
 export default function Home() {
   const [user, setUser] = useState<any>(null);
@@ -51,10 +47,6 @@ export default function Home() {
     }
   }
 
-  function logUser() {
-    console.log("loguser = ", user.email);
-  }
-
   function renderAuthUi() {
     return (
       <Row gutter={12} justify="end" style={{ margin: "10px" }}>
@@ -64,27 +56,6 @@ export default function Home() {
             Login
             <IconLogin />
           </Button>
-        </Col>
-        <Col>
-          <Button
-            type="primary"
-            onClick={() => defaultErrorModal("modal private")}
-          >
-            test log
-          </Button>
-        </Col>
-        <Col>
-          <Button
-            type="primary"
-            onClick={() => getApiTest()}
-          >
-            test call api
-          </Button>
-        </Col>
-        <Col>
-          <ButtonPrimary disabled={true} onClick={() => { }}>
-            Save This Event
-          </ButtonPrimary>
         </Col>
       </Row>
     );

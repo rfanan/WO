@@ -30,13 +30,13 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="w-full px-10 py-6">
-        <div className="relative items-center ">
+      <div className="w-full px-5 md:py-5">
+        <div className="items-center ">
           <div className="flex justify-between">
             <div>
               <div>logo</div>
             </div>
-            <div className="flex gap-5 font-medium">
+            <div className="hidden md:flex gap-5 font-medium">
               <div>Home</div>
               <div>About</div>
               <div>Service</div>

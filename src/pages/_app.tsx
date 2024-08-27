@@ -37,7 +37,9 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   function renderContentOnly() {
-    return <Component {...pageProps} />;
+    return <AuthProvider>
+      <Component {...pageProps} />
+    </AuthProvider>;
   }
 
   if (pathnameParts[0] == "admin") {

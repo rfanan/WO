@@ -1,12 +1,12 @@
 import { UserOutlined } from "@ant-design/icons";
 import {
-  faAddressCard,
   faCalendarDays,
   faUserGraduate,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface Props {
@@ -14,26 +14,23 @@ interface Props {
 }
 
 const SideNavigation = (props: Props) => {
+  const router = useRouter();
+
   const MenuItems = [
     {
-      key: "/admin/calendar",
+      key: "/admin/dashboard",
       icon: <FontAwesomeIcon icon={faCalendarDays} />,
-      label: `Calendar`,
+      label: `Dashboard`,
     },
     {
-      key: "/admin/student",
+      key: "/admin/packages",
       icon: <FontAwesomeIcon icon={faUserGraduate} />,
-      label: `Student`,
+      label: `Package List`,
     },
     {
-      key: "/admin/your-profile",
+      key: "/admin/services",
       icon: React.createElement(UserOutlined),
-      label: `Your Profile`,
-    },
-    {
-      key: "/admin/enrollment",
-      icon: <FontAwesomeIcon icon={faAddressCard} />,
-      label: `Enrolment`,
+      label: `Service List`,
     },
   ];
 
@@ -46,6 +43,10 @@ const SideNavigation = (props: Props) => {
           mode="inline"
           defaultSelectedKeys={["1"]}
           items={MenuItems}
+          onSelect={(item: any) => {
+            const pathName = item.key
+            router.push(pathName)
+          }}
         />
       </Sider>
     </>

@@ -1,20 +1,12 @@
-import { getFirebaseAuth, subscribeToAuthChanges } from "@/lib/config/firebase";
+import { getFirebaseAuth } from "@/lib/config/firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
-import React, { useEffect, useState } from "react";
 import { defaultErrorModal } from "../modal/DefaultErrorModal";
 import Button from "../button/button";
 import { IconUser } from "@tabler/icons-react";
+import { useAuth } from "@/lib/auth";
 
 const Navbar = () => {
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    const unsubscribe = subscribeToAuthChanges(setUser);
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const { user } = useAuth();
 
   async function handleGoogleLogin() {
     try {

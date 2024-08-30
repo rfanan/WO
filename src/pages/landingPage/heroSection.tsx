@@ -8,7 +8,7 @@ import { IconLocation, IconWorld } from "@tabler/icons-react";
 
 const HeroSection = () => {
   return (
-    <div className="felx felx-col items-center justify-between">
+    <div className="felx felx-col items-center justify-between ">
       <div className="relative w-full">
         <div className="absolute -z-10 w-full bg-cover">
           <Image

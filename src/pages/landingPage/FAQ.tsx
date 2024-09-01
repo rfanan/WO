@@ -36,12 +36,12 @@ const FAQ = () => {
 
   return (
     <>
-      <div className="py-80 px-52">
-        <div className="grid place-items-center gap-4 py-24">
+      <div className="py-5 p-5 sm:py-12 sm:px-40 lg:px-64">
+        <div className="grid place-items-center gap-4 py-10">
           <div className="text-4xl font-semibold">FAQ</div>
-          <div className="text-lg px-36 text-center">
+          <div className="text-lg md:px-36 text-center">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Necessitatibus voluptates enim tempore animi!
+       
           </div>
         </div>
         {FaqData.map(({ title, content }, index) => (
@@ -50,11 +50,11 @@ const FAQ = () => {
               onClick={() => handleToggle(index)}
               className="flex justify-between w-full bg-transparent"
             >
-              <span className="font-semibold text-xl">{title}</span>
+              <span className="font-semibold text-lg">{title}</span>
               <span className="grid">
                 <IconMinus
                   className={`transform origin-center transition duration-200 ease-out ${
-                    openIndex === index ? "!rotate-160" : ""
+                    openIndex === index ? "!rotate-160 opacity-0" : ""
                   }`}
                 />
                 <IconMinusVertical
@@ -73,7 +73,7 @@ const FAQ = () => {
             >
               <div className="overflow-hidden py-5 px-3">{content}</div>
             </div>
-            <div className="border-t border-gray-300 py-7"></div>
+            <div className="border-t border-gray-200 py-7"></div>
           </div>
         ))}
       </div>

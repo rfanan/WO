@@ -18,3 +18,12 @@ export async function API_getAllServices(token: any, body?: any) {
         body
     );
 }
+
+export async function API_getAllPackages(token: any, body?: any) {
+    return await requestToBackend(
+        "GET",
+        ENDPOINTS.API_PACKAGES,
+        token,
+        body
+    );
+}

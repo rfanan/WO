@@ -3,7 +3,7 @@ import ButtonSecondary from "@/components/button/ButtonSecondary";
 import SearchableTable from "@/components/common/SearchableTable";
 import usePagination, { DEFAULT_TABLE_PARAMS, getDefaultParamsForPagination } from "@/components/hooks/usePagination";
 import { defaultErrorModal } from "@/components/modal/DefaultErrorModal";
-import { API_getAllServices } from "@/lib/api/api";
+import { API_getAllPackages, API_getAllServices } from "@/lib/api/api";
 import { useAuth } from "@/lib/auth";
 import { COLOR } from "@/styles/color";
 import { getRenderKey } from "@/util/common";
@@ -16,7 +16,7 @@ export default function Packages() {
   const [isLoading, setIsLoading] = useState(false)
 
   const [rows, setRows] = useState([]);
-  const { tableParams, handlePagination, handleSort, handleSearch, setTableParams } = usePagination(DEFAULT_TABLE_PARAMS, getAllServices, () => setRows([]));
+  const { tableParams, handlePagination, handleSort, handleSearch, setTableParams } = usePagination(DEFAULT_TABLE_PARAMS, getAllPackages, () => setRows([]));
 
   const columns = [
     {
@@ -28,6 +28,11 @@ export default function Packages() {
       title: 'Description',
       dataIndex: 'description',
       key: 'description',
+    },
+    {
+      title: 'Service List',
+      dataIndex: 'service_list',
+      key: 'service_list',
     },
     {
       title: 'Price',
@@ -49,17 +54,17 @@ export default function Packages() {
   }, [user])
 
   async function refreshData() {
-    await getAllServices(DEFAULT_TABLE_PARAMS)
+    await getAllPackages(DEFAULT_TABLE_PARAMS)
   }
 
-  async function getAllServices(newTableParams: any) {
+  async function getAllPackages(newTableParams: any) {
     setIsLoading(true)
     let token = await user?.getIdToken();
     let body = getDefaultParamsForPagination(newTableParams);
 
     if (!token) return
     try {
-      let response = await API_getAllServices(token, body);
+      let response = await API_getAllPackages(token, body);
       if (response.body.is_success) {
         const result = await response.body.data;
         const pagination = await response.body.pagination;

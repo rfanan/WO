@@ -7,8 +7,8 @@ import { API_getAllServices } from "@/lib/api/api";
 import { useAuth } from "@/lib/auth";
 import { COLOR } from "@/styles/color";
 import { getRenderKey } from "@/util/common";
-import { PlusOutlined, SyncOutlined } from "@ant-design/icons";
-import { Col, Row, Table } from "antd";
+import { EditOutlined, PlusOutlined, SyncOutlined } from "@ant-design/icons";
+import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 
 export default function Services() {
@@ -28,6 +28,14 @@ export default function Services() {
       title: 'Description',
       dataIndex: 'description',
       key: 'description',
+    },
+    {
+      width: 200,
+      title: 'Action',
+      dataIndex: 'action',
+      key: 'action',
+      disableTopBarAction: true,
+      render: (item: any, row: any) => renderActionButton(row)
     },
   ];
 
@@ -64,6 +72,23 @@ export default function Services() {
       defaultErrorModal("Call API error")
       setIsLoading(false)
     }
+  }
+
+  function renderActionButton(row: any) {
+    let data = []
+
+    data.push(
+      <div style={{ gap: 16, display: "flex", alignItems: "center" }}>
+        <ButtonSecondary icon={<EditOutlined />} onClick={() => {
+          console.log();
+        }}>Edit</ButtonSecondary>
+        <ButtonSecondary type={"delete"} onClick={() => {
+          console.log();
+        }} />
+      </div>
+    )
+
+    return data
   }
 
   function renderExtraButton() {

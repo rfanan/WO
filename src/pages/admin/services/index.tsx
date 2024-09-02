@@ -1,3 +1,5 @@
+import ButtonPrimary from "@/components/button/ButtonPrimary";
+import ButtonSecondary from "@/components/button/ButtonSecondary";
 import SearchableTable from "@/components/common/SearchableTable";
 import usePagination, { DEFAULT_TABLE_PARAMS, getDefaultParamsForPagination } from "@/components/hooks/usePagination";
 import { defaultErrorModal } from "@/components/modal/DefaultErrorModal";
@@ -5,6 +7,7 @@ import { API_getAllServices } from "@/lib/api/api";
 import { useAuth } from "@/lib/auth";
 import { COLOR } from "@/styles/color";
 import { getRenderKey } from "@/util/common";
+import { PlusOutlined, SyncOutlined } from "@ant-design/icons";
 import { Col, Row, Table } from "antd";
 import { useEffect, useState } from "react";
 
@@ -41,6 +44,7 @@ export default function Services() {
     let token = await user?.getIdToken();
     let body = getDefaultParamsForPagination(newTableParams);
 
+    if (!token) return
     try {
       let response = await API_getAllServices(token, body);
       if (response.body.is_success) {
@@ -62,6 +66,31 @@ export default function Services() {
     }
   }
 
+  function renderExtraButton() {
+    return (
+      <>
+        <ButtonSecondary
+          icon={<SyncOutlined />}
+          shapeType="oval"
+          onClick={() => {
+            refreshData()
+          }}
+        >
+          Refresh
+        </ButtonSecondary>
+        <ButtonPrimary
+          icon={<PlusOutlined />}
+          shapeType="oval"
+          onClick={() => {
+            console.log("Add Click");
+          }}
+        >
+          Add Service
+        </ButtonPrimary>
+      </>
+    )
+  }
+
   return (
     <div style={{
       margin: '24px 16px',
@@ -70,8 +99,11 @@ export default function Services() {
       background: COLOR.defaultBackground,
       borderRadius: 8,
     }}>
-      <div>
-        Admin Service
+      <div style={{
+        fontSize: 24,
+        fontWeight: 'bold'
+      }}>
+        <h1>Service List</h1>
       </div>
       <div>
         <Row>
@@ -94,6 +126,7 @@ export default function Services() {
               onSearch={handleSearch}
               onSort={handleSort}
               bordered={false}
+              buttonComponent={renderExtraButton()}
             />
           </Col>
         </Row>

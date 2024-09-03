@@ -3,7 +3,7 @@ import ButtonSecondary from "@/components/button/ButtonSecondary";
 import SearchableTable from "@/components/common/SearchableTable";
 import usePagination, { DEFAULT_TABLE_PARAMS, getDefaultParamsForPagination } from "@/components/hooks/usePagination";
 import { defaultErrorModal } from "@/components/modal/DefaultErrorModal";
-import { API_getAllPackages, API_getAllServices } from "@/lib/api/api";
+import { API_getAllPackages } from "@/lib/api/api";
 import { useAuth } from "@/lib/auth";
 import { COLOR } from "@/styles/color";
 import { getRenderKey } from "@/util/common";
@@ -21,23 +21,24 @@ export default function Packages() {
   const columns = [
     {
       title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'package_name',
+      key: 'package_name',
     },
     {
       title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
+      dataIndex: 'package_description',
+      key: 'package_description',
     },
     {
       title: 'Service List',
       dataIndex: 'service_list',
       key: 'service_list',
+      render: (item: any, row: any) => renderServiceList(row.services)
     },
     {
       title: 'Price',
-      dataIndex: 'price',
-      key: 'price',
+      dataIndex: 'package_price',
+      key: 'package_price',
     },
     {
       width: 200,
@@ -82,6 +83,22 @@ export default function Packages() {
       defaultErrorModal("Call API error")
       setIsLoading(false)
     }
+  }
+
+  function renderServiceList(services: any) {
+    let content: any = []
+
+    for (let i in services) {
+      let service = services[i]
+      content.push(
+        <li>{service.name}</li>
+      )
+    }
+    return (
+      <ul style={{ listStyleType: 'disc', paddingLeft: '0px' }}>
+        {content}
+      </ul>
+    )
   }
 
   function renderActionButton(row: any) {
